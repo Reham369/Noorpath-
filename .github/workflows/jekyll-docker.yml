@@ -1,0 +1,20 @@
+Name: Jekyll CI Website
+
+على:
+  يدفع:
+    Branches:[ "main" ]
+  pull_request:
+    الفروع:[ "main" ]
+
+Careers:
+  يبني:
+
+    يدير: Ubunto-Latis
+
+    خطوات:
+    -استخدامات: Actions/Exit@v4
+    -name:بناء الموقع في حاوية جيكل / البناء
+      يجري:|
+        Docker Run \
+        -v${{ github.workspace }}:/srv/jekyll -v${{ github.workspace }}/_site:/srv/jekyll/_site\
+        jekyll /builder: الأحدث /bin /bash -c "chmod -R 777 /srv /jekyll & amp ؛ & amp ؛ jekyll build --future"
