@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NoorPath - نموذج بصري</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #1a1d2e;
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1d2e, #2d3047);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(108, 99, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #6c63ff, #ff9f43);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            color: #6c63ff;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(255, 159, 67, 0.05));
+        }
+
+        .profile-section {
+            margin-bottom: 30px;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #6c63ff, #ff9f43);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 3rem;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #8b8fa3;
+            margin-bottom: 30px;
+        }
+
+        .availability {
+            display: inline-block;
+            background: rgba(108, 99, 255, 0.2);
+            color: #6c63ff;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid #6c63ff;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: #ff9f43;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Rooms Grid */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .room-card {
+            background: linear-gradient(135deg, #2d3047, #1a1d2e);
+            border-radius: 20px;
+            padding: 0;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            position: relative;
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.3);
+            border-color: #6c63ff;
+        }
+
+        .room-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #6c63ff, #ff9f43);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .room-icon {
+            position: relative;
+            z-index: 1;
+        }
+
+        .room-info {
+            padding: 25px;
+        }
+
+        .room-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .room-description {
+            color: #8b8fa3;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .room-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .room-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #6c63ff;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #6c63ff;
+            animation: pulse 2s infinite;
+        }
+
+        .room-badge {
+            background: linear-gradient(45deg, #6c63ff, #ff9f43);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Premium Badge */
+        .premium-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #ff9f43, #ffd700);
+            color: #1a1d2e;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(255, 159, 67, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #2d3047;
+            color: #8b8fa3;
+            border-top: 1px solid rgba(108, 99, 255, 0.2);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">NoorPath</div>
+        <div class="menu-icon">☰</div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="profile-section">
+            <div class="profile-image">👤</div>
+            <h1 class="hero-title">مرحباً بك في NoorPath</h1>
+            <p class="hero-subtitle">منصة التطوير الذاتي والفلسفة المعاصرة</p>
+            <span class="availability">● متاح الآن</span>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h2 class="section-title">📚 الغرف المتاحة</h2>
+        
+        <div class="rooms-grid">
+            <!-- Room 1: Audio -->
+            <div class="room-card">
+                <div class="room-image">
+                    <span class="room-icon">🎙️</span>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">غرفة الصوت</h3>
+                    <p class="room-description">محاضرات صوتية عميقة وبودكاست فلسفي يناقش قضايا التطوير الذاتي والفكر المعاصر</p>
+                    <div class="room-meta">
+                        <div class="room-status">
+                            <span class="status-dot"></span>
+                            مباشر الآن
+                        </div>
+                        <span class="room-badge">مجاني</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 2: Video -->
+            <div class="room-card">
+                <div class="room-image">
+                    <span class="room-icon">🎬</span>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">غرفة الفيديو</h3>
+                    <p class="room-description">محاضرات مصورة وورش عمل تفاعلية مع خبراء في علم النفس والفلسفة التطبيقية</p>
+                    <div class="room-meta">
+                        <div class="room-status">
+                            <span class="status-dot"></span>
+                            12 مشارك
+                        </div>
+                        <span class="room-badge">مجاني</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 3: Consultations -->
+            <div class="room-card">
+                <div class="premium-badge">⭐ مميز</div>
+                <div class="room-image">
+                    <span class="room-icon">💡</span>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">غرفة الاستشارات</h3>
+                    <p class="room-description">جلسات استشارية فردية مع متخصصين معتمدين لوضع خطة تطوير شخصية مخصصة</p>
+                    <div class="room-meta">
+                        <div class="room-status">
+                            <span class="status-dot"></span>
+                            احجز الآن
+                        </div>
+                        <span class="room-badge">120$</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 4: Forum -->
+            <div class="room-card">
+                <div class="room-image">
+                    <span class="room-icon">💬</span>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">المنتدى</h3>
+                    <p class="room-description">مجتمع نقاشي للحوارات الفكرية العميقة وتبادل الخبرات مع مفكرين من جميع أنحاء العالم</p>
+                    <div class="room-meta">
+                        <div class="room-status">
+                            <span class="status-dot"></span>
+                            342 عضو
+                        </div>
+                        <span class="room-badge">مجاني</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 5: Announcements -->
+            <div class="room-card">
+                <div class="room-image">
+                    <span class="room-icon">📢</span>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">غرفة الإعلانات</h3>
+                    <p class="room-description">آخر الأخبار والفعاليات والإعلانات المهمة حول الدورات والمحاضرات القادمة</p>
+                    <div class="room-meta">
+                        <div class="room-status">
+                            <span class="status-dot"></span>
+                            5 إعلانات جديدة
+                        </div>
+                        <span class="room-badge">مجاني</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 6: Library -->
+            <div class="room-card">
+                <div class="premium-badge">⭐ مميز</div>
+                <div class="room-image">
+                    <span class="room-icon">📖</span>
+                </div>
+                <div class="room-info">
+                    <h3 class="room-title">مكتبة المعرفة</h3>
+                    <p class="room-description">مكتبة رقمية شاملة تحتوي على مقالات حصرية وكتب إلكترونية ومراجع فلسفية قيمة</p>
+                    <div class="room-meta">
+                        <div class="room-status">
+                            <span class="status-dot"></span>
+                            500+ مصدر
+                        </div>
+                        <span class="room-badge">49$/شهر</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>NoorPath © 2024 - منصة التطوير الذاتي والفلسفة المعاصرة</p>
+    </footer>
+</body>
+</html>
